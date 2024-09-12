@@ -1,11 +1,13 @@
 {
-  "scripts": {
-    "build": "tsc",
-    "start": "ts-node src/index.ts",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"src/**/*.ts\""
-  },
+    "name": "izykowski-admin",
+    "version": "1",
+    "scripts": {
+        "build": "tsc",
+        "start": "ts-node src/index.ts",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write \"src/**/*.ts\""
+    },
     "lint-staged": {
         "*.ts": [
             "eslint --fix",

@@ -1,6 +1,7 @@
 {
     "name": "izykowski-admin",
     "version": "1",
+    "type": "module",
     "scripts": {
         "build": "tsc",
         "start": "ts-node src/index.ts",
@@ -29,5 +30,12 @@
         "ts-node": "^10.9.2",
         "typescript": "^5.6.2",
         "typescript-eslint": "^8.5.0"
+    },
+    "dependencies": {
+        "@adminjs/express": "^6.1.0",
+        "@adminjs/mongoose": "^4.1.0",
+        "adminjs": "^7.8.12",
+        "express": "^4.21.0",
+        "mongoose": "^8.6.2"
     }
 }

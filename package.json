@@ -2,10 +2,10 @@
     "name": "izykowski-admin",
     "version": "1",
     "type": "module",
-    "main": "src/index.ts",
+    "main": "api/index.ts",
     "scripts": {
         "build": "tsc",
-        "start": "tsx src/index.ts",
+        "start": "tsx watch api/index.ts",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier --write \"src/**/*.ts\""

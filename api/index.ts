@@ -3,8 +3,8 @@ import AdminJSExpress from '@adminjs/express';
 import express from 'express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
-import { Image } from '../entities/Image.js';  // Adjust the path if necessary
 import dotenv from 'dotenv';
+import { Image } from './entities/Image.js';
 
 dotenv.config();
 

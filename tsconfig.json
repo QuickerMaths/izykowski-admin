@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "nodenext",
+    "target": "es2023",
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "strict": true,
@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["src"],
+  "include": ["api"],
   "exclude": ["node_modules"]
 }
 

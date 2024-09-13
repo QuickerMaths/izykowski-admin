@@ -22,10 +22,8 @@ const start = async () => {
     };
     const admin = new AdminJS(adminOptions);
     const adminRouter = AdminJSExpress.buildRouter(admin);
-    app.get('/', (_req, res) => {
-        return res.send('ok');
-    });
     app.use(admin.options.rootPath, adminRouter);
+    app.get('/', (req, res) => res.send('Express on Vercel'));
     app.listen(PORT, () => {
         console.log('http://localhost:3000');
     });

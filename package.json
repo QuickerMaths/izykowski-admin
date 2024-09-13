@@ -24,6 +24,7 @@
         "@types/node": "^22.5.4",
         "@typescript-eslint/eslint-plugin": "^8.5.0",
         "@typescript-eslint/parser": "^8.5.0",
+        "@vercel/node": "^3.2.14",
         "eslint": "^9.10.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.1",

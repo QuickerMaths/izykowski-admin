@@ -3,7 +3,7 @@ import AdminJSExpress from '@adminjs/express';
 import express from 'express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
-import { Image } from './entities/Image.ts';
+import { Image } from './entities/Image.js';
 
 const PORT = 3000;
 

@@ -4,7 +4,7 @@
     "type": "module",
     "main": "src/index.ts",
     "scripts": {
-        "build": "tsc --output public",
+        "build": "tsc",
         "start": "tsx src/index.ts",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",

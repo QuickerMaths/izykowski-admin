@@ -2,6 +2,7 @@
     "name": "izykowski-admin",
     "version": "1",
     "type": "module",
+    "main": "src/index.ts",
     "scripts": {
         "build": "tsc",
         "start": "tsx src/index.ts",
@@ -17,7 +18,9 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.10.0",
+        "@types/cors": "^2.8.17",
         "@types/express": "^4.17.21",
+        "@types/express-session": "^1.18.0",
         "@types/node": "^22.5.4",
         "@typescript-eslint/eslint-plugin": "^8.5.0",
         "@typescript-eslint/parser": "^8.5.0",
@@ -36,6 +39,7 @@
         "@adminjs/express": "^6.1.0",
         "@adminjs/mongoose": "^4.1.0",
         "adminjs": "^7.8.12",
+        "cors": "^2.8.5",
         "express": "^4.21.0",
         "express-formidable": "^1.2.0",
         "express-session": "^1.18.0",

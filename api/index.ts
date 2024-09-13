@@ -3,7 +3,7 @@ import AdminJSExpress from '@adminjs/express';
 import express, { Request, Response } from 'express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
-import { Image } from '../entities/Image';
+import { Image } from './entities/Image.js';
 
 AdminJS.registerAdapter({
     Database: AdminJSMongoose.Database,
@@ -32,7 +32,7 @@ const adminRouter = AdminJSExpress.buildRouter(admin);
 
 app.use(admin.options.rootPath, adminRouter);
 
-app.get('/api', (req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
     res.send('API is running');
 });
 

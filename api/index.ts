@@ -1,38 +1,42 @@
 import AdminJS from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
-import { Image } from './entities/Image.js';
-
-const PORT = 3000;
+import { Image } from '../entities/Image';
 
 AdminJS.registerAdapter({
     Database: AdminJSMongoose.Database,
     Resource: AdminJSMongoose.Resource,
 });
 
-const start = async () => {
-    const app = express();
-    await mongoose.connect('mongodb+srv://QucikerMaths:8Zol1rrU5OLzdDqK@cluster0.uely4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+let cachedDb: typeof mongoose | null = null;
 
-    const adminOptions = {
-        resources: [Image],
+async function connectToDatabase(): Promise<typeof mongoose> {
+    if (cachedDb) {
+        return cachedDb;
     }
-    const admin = new AdminJS(adminOptions);
+    const db = await mongoose.connect(process.env.MONGODB_URI as string);
+    cachedDb = db;
+    return db;
+}
 
-    const adminRouter = AdminJSExpress.buildRouter(admin);
-    app.get('/', (req, res) => {
-        return res.send('ok')
-    });
+const app = express();
 
-    app.use(admin.options.rootPath, adminRouter);
-
-    app.listen(PORT, () => {
-        console.log(
-            `AdminJS started on http://localhost:${PORT}${admin.options.rootPath}`
-        );
-    });
+const adminOptions = {
+    resources: [Image],
 };
 
-start();
+const admin = new AdminJS(adminOptions);
+const adminRouter = AdminJSExpress.buildRouter(admin);
+
+app.use(admin.options.rootPath, adminRouter);
+
+app.get('/api', (req: Request, res: Response) => {
+    res.send('API is running');
+});
+
+export default async function handler(req: Request, res: Response) {
+    await connectToDatabase();
+    return app(req, res);
+}

@@ -6,7 +6,7 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "outDir": "./public",
+        "outDir": "./dist",
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "rootDir": "api",
@@ -16,5 +16,5 @@
         }
     },
     "include": ["api/**/*"],
-    "exclude": ["node_modules", "public"]
+    "exclude": ["node_modules", "dist"]
 }

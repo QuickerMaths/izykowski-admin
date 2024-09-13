@@ -4,6 +4,7 @@ import express from 'express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import { Image } from './entities/Image.js';
 
 dotenv.config();
@@ -26,6 +27,8 @@ const start = async () => {
         const adminRouter = AdminJSExpress.buildRouter(admin);
 
         app.use(express.json());
+
+        app.use(cors());
 
         app.use(admin.options.rootPath, adminRouter);
 

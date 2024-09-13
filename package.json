@@ -8,9 +8,9 @@
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier --write \"src/**/*.ts\"",
-        "build": "rimraf public && tsc",
+        "build": "rimraf dist && tsc",
         "ts.check": "tsc --project tsconfig.json",
-        "add-build": "git add public"
+        "add-build": "git add dist"
     },
     "pre-commit": [
         "ts.check",

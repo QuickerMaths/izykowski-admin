@@ -6,13 +6,13 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "outDir": "./dist",
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "rootDir": "api",
+        "outDir": "./dist",
         "baseUrl": ".",
         "paths": {
-            "*": ["*", "api/*"]
+            "@/*": ["./api/*"]
         }
     },
     "include": ["api/**/*"],

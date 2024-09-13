@@ -4,6 +4,9 @@ import express, { Request, Response } from 'express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
 import { Image } from './entities/Image.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 AdminJS.registerAdapter({
     Database: AdminJSMongoose.Database,
@@ -13,6 +16,7 @@ AdminJS.registerAdapter({
 let cachedDb: typeof mongoose | null = null;
 
 async function connectToDatabase(): Promise<typeof mongoose> {
+    console.log(process.env.DB_URI);
     if (cachedDb) {
         return cachedDb;
     }

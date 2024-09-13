@@ -4,12 +4,19 @@
     "type": "module",
     "main": "api/index.ts",
     "scripts": {
-        "build": "tsc",
         "start": "tsx watch api/index.ts",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "format": "prettier --write \"src/**/*.ts\""
+        "format": "prettier --write \"src/**/*.ts\"",
+        "build": "rimraf public && tsc",
+        "ts.check": "tsc --project tsconfig.json",
+        "add-build": "git add public"
     },
+    "pre-commit": [
+        "ts.check",
+        "build",
+        "add-build"
+    ],
     "lint-staged": {
         "*.ts": [
             "eslint --fix",
@@ -46,6 +53,8 @@
         "express-formidable": "^1.2.0",
         "express-session": "^1.18.0",
         "mongoose": "^8.6.2",
+        "pre-commit": "^1.2.2",
+        "rimraf": "^6.0.1",
         "tslib": "^2.7.0"
     }
 }

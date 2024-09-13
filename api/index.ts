@@ -29,7 +29,6 @@ const start = async () => {
 
         app.get('/', (_req, res) => res.send('Express on Vercel'));
 
-        app.listen(3000);
     } catch (error) {
         console.error('Error starting the server:', error);
     }

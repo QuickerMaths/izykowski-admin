@@ -1,6 +1,6 @@
 import AdminJS from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
 import { Image } from './entities/Image.js';
@@ -8,39 +8,26 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const PORT = 3000;
+
 AdminJS.registerAdapter({
     Database: AdminJSMongoose.Database,
     Resource: AdminJSMongoose.Resource,
 });
-
-let cachedDb: typeof mongoose | null = null;
-
-async function connectToDatabase(): Promise<typeof mongoose> {
-    console.log(process.env.DB_URI);
-    if (cachedDb) {
-        return cachedDb;
-    }
-    const db = await mongoose.connect(process.env.MONGODB_URI as string);
-    cachedDb = db;
-    return db;
-}
-
-const app = express();
-
-const adminOptions = {
-    resources: [Image],
+const start = async () => {
+    const app = express();
+    await mongoose.connect(process.env.DB_URI as string);
+    const adminOptions = {
+        resources: [Image],
+    };
+    const admin = new AdminJS(adminOptions);
+    const adminRouter = AdminJSExpress.buildRouter(admin);
+    app.get('/', (_req, res) => {
+        return res.send('ok');
+    });
+    app.use(admin.options.rootPath, adminRouter);
+    app.listen(PORT, () => {
+        console.log('http://localhost:3000');
+    });
 };
-
-const admin = new AdminJS(adminOptions);
-const adminRouter = AdminJSExpress.buildRouter(admin);
-
-app.use(admin.options.rootPath, adminRouter);
-
-app.get('/', (_req: Request, res: Response) => {
-    res.send('API is running');
-});
-
-export default async function handler(req: Request, res: Response) {
-    await connectToDatabase();
-    return app(req, res);
-}
+start();

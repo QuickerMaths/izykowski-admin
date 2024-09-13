@@ -25,6 +25,8 @@ const start = async () => {
         const admin = new AdminJS(adminOptions);
         const adminRouter = AdminJSExpress.buildRouter(admin);
 
+        app.use(express.json());
+
         app.use(admin.options.rootPath, adminRouter);
 
         app.get('/', (_req, res) => res.send('Express on Vercel'));

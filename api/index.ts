@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import Image from './entities/Image.js';
 import Appointment from './entities/Appointment.js';
+import { Components, componentLoader } from './components/componentsLoader.js';
 
 dotenv.config();
 
@@ -15,32 +16,39 @@ AdminJS.registerAdapter({
     Resource: AdminJSMongoose.Resource,
 });
 
+const adminOptions = {
+    componentLoader,
+    pages: {
+        spotkania: {
+            component: Components.Calendar
+        },
+    },
+    resources: [
+        {
+            resource: Image,
+            options: {
+                navigation: {
+                    name: 'Galeria',
+                },
+            },
+        },
+        {
+            resource: Appointment,
+            options: {
+                navigation: {
+                    name: 'Kalendarz',
+                },
+            },
+        },
+    ],
+};
+
 const app = express();
 
 const start = async () => {
     try {
         await mongoose.connect(process.env.DB_URI as string);
 
-        const adminOptions = {
-            resources: [
-                {
-                    resource: Image,
-                    options: {
-                        navigation: {
-                            name: 'Galeria',
-                        },
-                    },
-                },
-                {
-                    resource: Appointment,
-                    options: {
-                        navigation: {
-                            name: 'Kalendarz',
-                        },
-                    },
-                },
-            ],
-        };
         const admin = new AdminJS(adminOptions);
         const adminRouter = AdminJSExpress.buildRouter(admin);
 

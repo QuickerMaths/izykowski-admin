@@ -5,7 +5,8 @@ import * as AdminJSMongoose from '@adminjs/mongoose';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { Image } from './entities/Image.js';
+import Image from './entities/Image.js';
+import Appointment from './entities/Appointment.js';
 
 dotenv.config();
 
@@ -21,7 +22,24 @@ const start = async () => {
         await mongoose.connect(process.env.DB_URI as string);
 
         const adminOptions = {
-            resources: [Image],
+            resources: [
+                {
+                    resource: Image,
+                    options: {
+                        navigation: {
+                            name: 'Galeria',
+                        },
+                    },
+                },
+                {
+                    resource: Appointment,
+                    options: {
+                        navigation: {
+                            name: 'Kalendarz',
+                        },
+                    },
+                },
+            ],
         };
         const admin = new AdminJS(adminOptions);
         const adminRouter = AdminJSExpress.buildRouter(admin);
@@ -34,12 +52,12 @@ const start = async () => {
 
         app.get('/', (_req, res) => res.status(200).send('Express on Vercel'));
 
-        app.listen(3000, () => console.log('App is running on http://localhost:3000'));
-
+        app.listen(3000, () =>
+            console.log('App is running on http://localhost:3000')
+        );
     } catch (error) {
         console.error('Error starting the server:', error);
     }
 };
 
 start();
-

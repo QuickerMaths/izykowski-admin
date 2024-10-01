@@ -7,7 +7,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import Image from './entities/Image.js';
 import Appointment from './entities/Appointment.js';
-import { componentLoader } from './components/componentsLoader.js';
+import News from './entities/News.js';
+import { componentLoader, Components } from './components/componentsLoader.js';
 import uploadFeature from '@adminjs/upload';
 
 dotenv.config();
@@ -73,6 +74,23 @@ const adminOptions = {
             options: {
                 navigation: {
                     name: 'Kalendarz',
+                },
+            },
+        },
+        {
+            resource: News,
+            options: {
+                properties: {
+                    content: {
+                        type: 'richtext',
+                        components: {
+                            edit: Components.TextEditor,
+                            show: Components.TextEditor,
+                        },
+                    },
+                },
+                navigation: {
+                    name: 'Aktualności',
                 },
             },
         },

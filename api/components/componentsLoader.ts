@@ -6,6 +6,10 @@ const Components = {
         'Calendar',
         './Calendar'
     ),
+    Editor: componentLoader.add(
+        'TextEditor',
+        './TextEditor'
+    ),
 };
 
 export { Components, componentLoader };

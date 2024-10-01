@@ -4,7 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 const TextEditor = () => {
     return (
         <Editor
-            apiKey={'ja22qkzljcnff6ht8da6wokisiwztumwwr641kip8g1qjln9'}
+            apiKey={process.env.TINYMCE_API_KEY}
             init={{
                 plugins: [
                     'anchor',

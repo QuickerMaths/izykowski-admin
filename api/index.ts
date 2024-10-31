@@ -35,6 +35,7 @@ const adminOptions = {
         {
             resource: Image,
             options: {
+                id: 'image',
                 properties: {
                     s3Key: {
                         isVisible: false,
@@ -72,6 +73,7 @@ const adminOptions = {
         {
             resource: Appointment,
             options: {
+                id: 'appointment',
                 navigation: {
                     name: 'Kalendarz',
                 },
@@ -80,6 +82,7 @@ const adminOptions = {
         {
             resource: News,
             options: {
+                id: 'news',
                 properties: {
                     content: {
                         type: 'richtext',

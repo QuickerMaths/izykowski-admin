@@ -28,6 +28,9 @@ const AWScredentials = {
 };
 
 const adminOptions = {
+    env: {
+        TINYMCE_API_KEY: process.env.REACT_APP_TINYMCE_API_KEY as string
+    },
     rootPath: '/',
     componentLoader,
     resources: [
@@ -92,11 +95,12 @@ const adminOptions = {
 
 const app = express();
 
+export const admin = new AdminJS(adminOptions);
+
 const start = async () => {
     try {
         await mongoose.connect(process.env.DB_URI as string);
 
-        const admin = new AdminJS(adminOptions);
         const adminRouter = AdminJSExpress.buildRouter(admin);
 
         app.use(express.json());

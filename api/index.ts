@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import Image from './entities/Image.js';
-import Appointment from './entities/Appointment.js';
 import News from './entities/News.js';
 import { componentLoader, Components } from './components/componentsLoader.js';
 import uploadFeature from '@adminjs/upload';
@@ -71,21 +70,12 @@ const adminOptions = {
             ],
         },
         {
-            resource: Appointment,
-            options: {
-                id: 'appointment',
-                navigation: {
-                    name: 'Kalendarz',
-                },
-            },
-        },
-        {
             resource: News,
             options: {
                 id: 'news',
                 properties: {
                     content: {
-                        type: 'richtext',
+                        type: 'textarea',
                         components: {
                             edit: Components.TextEditor,
                             show: Components.TextEditor,

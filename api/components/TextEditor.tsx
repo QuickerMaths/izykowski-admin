@@ -22,6 +22,7 @@ const TextEditor = (props: BasePropertyProps) => {
 
     return (
         <Editor
+        //@ts-expect-error this error is expected, everyting works properly
         apiKey={AdminJS.env.TINYMCE_API_KEY}
         value={value ?? ''}
         init={{

@@ -1,14 +1,13 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BasePropertyProps } from 'adminjs';
-import AdminJS from 'adminjs';
+import BundledEditor from './BundleEditor.js';
 
 const TextEditor = (props: BasePropertyProps) => {
     const { record, property, onChange } = props;
 
     const propValue = record?.params[property.path]
     const [value, setValue] = useState(propValue)
+    const editorRef = useRef(null);
 
     useEffect(() => {
         if (value !== propValue) {
@@ -21,25 +20,27 @@ const TextEditor = (props: BasePropertyProps) => {
     }
 
     return (
-        <Editor
-        //@ts-expect-error this error is expected, everyting works properly
-        apiKey={AdminJS.env.TINYMCE_API_KEY}
-        value={value ?? ''}
+        <BundledEditor 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onInit={(evt: any, editor: null) => editorRef.current = editor}
+        initialValue='<p>This is the initial content of the editor.</p>'
         init={{
+            height: 500,
+            menubar: false,
             plugins: [
-                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                'advlist', 'anchor', 'autolink', 'help', 'image', 'link', 'lists',
+                'searchreplace', 'table', 'wordcount'
             ],
-            toolbar:
-                'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-            ],
+            toolbar: 'undo redo | blocks | ' +
+                'bold italic forecolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
         }}
-        onBlur={() => onChange(property.path, value)}
-        onEditorChange={(content) => setValue(content)}
+        value={value}
+        setValue={setValue}
+        onChange={onChange}
+        property={property}
         />
     );
 };

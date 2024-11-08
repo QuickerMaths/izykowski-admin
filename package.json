@@ -45,6 +45,7 @@
         "typescript-eslint": "^8.5.0"
     },
     "dependencies": {
+        "@adminjs/bundler": "^3.0.0",
         "@adminjs/express": "^6.1.0",
         "@adminjs/mongoose": "^4.1.0",
         "@adminjs/upload": "^4.0.2",

@@ -1,3 +1,6 @@
+dist
+.adminjs
+
 # Logs
 logs
 *.log
